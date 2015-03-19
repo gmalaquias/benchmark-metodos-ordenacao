@@ -1,0 +1,6 @@
+/*
+Protótipos
+*/
+
+
+void OrdenacaoMain();
