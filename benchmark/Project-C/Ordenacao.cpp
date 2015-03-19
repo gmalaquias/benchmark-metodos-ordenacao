@@ -85,11 +85,17 @@ void selectionsortdesc(int vet[], int TAM){
 	}
 }
 
-/*6 - ) Fazer um programa que, utilizando ponteiros para um vetor de inteiros com 15 mil itens(gerados randomicamente), implemente todos os algoritmos de ordenação vistos.O programa deverá informar
-o tempo necessário para ordenar a lista nos dois sentidos(do maior para o menor e vice - versa).*/
-void PreencheVetor(int vet[], int tam){
+void PreencheVetorRandom(int vet[], int tam){
 	for (int i = 0; i < tam; i++)
 		vet[i] = rand();
+}
+void PreencheVetorCrescente(int vet[], int tam){
+	for (int i = 0; i < tam; i++)
+		vet[i] = i;
+}
+void PreencheVetorDecrescente(int vet[], int tam){
+	for (int i = 0; i < tam; i++)
+		vet[i] = tam - i;
 }
 void MostraVetor(int vet[], int tam){
 	for (int i = 0; i < tam; i++)
@@ -106,7 +112,6 @@ void IniciaCronometro(clock_t Ticks[]){
 void FinalizaCronometro(clock_t Ticks[]){
 	Ticks[1] = clock();
 }
-
 
 void merge(int vec[], int vecSize) {
 	int mid;
@@ -291,78 +296,140 @@ void bubblesortdesc(int vetor[], int tamanho){
 void OrdenacaoMain(){
 	int tam = 15000;
 	int vet[15000];
+	int	vet2[15000];
 	clock_t Ticks[2];
 
-	/*PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	selectionsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de Selecao crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	/* -------------------------------------
+	Vetor Random
+	------------------------------------- */
+	cout << "-------------------------------------------------------\n";
+	cout << "   Ordenacao de vetores preenchidos randomicamente \n";
+	cout << "-------------------------------------------------------\n";
 
-	PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	selectionsortdesc(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de Selecao decrescente | Tempo gasto: %g ms.", calculaTempo(Ticks));*/
-
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	bubblesort(vet, tam);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de bubblesort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
 
-	/*PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	bubblesortdesc(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de bubblesort decrescente | Tempo gasto: %g ms.", calculaTempo(Ticks));*/
-
-	/*PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	shellsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de shellsort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
-
-	PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	shellsortdesc(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de shellsort decrescente | Tempo gasto: %g ms.", calculaTempo(Ticks));*/
-
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	insertionsort(vet, tam);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de insertionsort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
 
-	/*PreencheVetor(vet, tam);
-	IniciaCronometro(Ticks);
-	insertionsortdesc(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo de insertionsort decrescente | Tempo gasto: %g ms.", calculaTempo(Ticks));*/
-
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	quicksort(vet, 0, tam - 1);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de quicksort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
 
-	
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	mergeSort(vet, tam);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de mergeSort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
 
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	gnomesort(vet, tam);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de gnomesort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
 
-	PreencheVetor(vet, tam);
+	PreencheVetorRandom(vet, tam);
 	IniciaCronometro(Ticks);
 	heapsort(vet, tam);
 	FinalizaCronometro(Ticks);
-	printf("\nMetodo de heapsort crescente | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	cout << "\n\n";
+
+	/* -------------------------------------
+	  Vetor Decrescente
+	------------------------------------- */
+	cout << "-------------------------------------------------------\n";
+	cout << "   Ordenacao de vetores preenchidos em ordem crescente \n";
+	cout << "-------------------------------------------------------\n";
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	bubblesort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	insertionsort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	quicksort(vet, 0, tam - 1);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	mergeSort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	gnomesort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorCrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	heapsort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	cout << "\n\n";
+
+	/* -------------------------------------
+	Vetor Crescente
+	------------------------------------- */
+	cout << "-------------------------------------------------------\n";
+	cout << " Ordenacao de vetores preenchidos em ordem descrescente \n";
+	cout << "-------------------------------------------------------\n";
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	bubblesort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	insertionsort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	quicksort(vet, 0, tam - 1);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	mergeSort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	gnomesort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+
+	PreencheVetorDecrescente(vet, tam);
+	IniciaCronometro(Ticks);
+	heapsort(vet, tam);
+	FinalizaCronometro(Ticks);
+	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	
 }
