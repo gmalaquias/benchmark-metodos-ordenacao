@@ -3,11 +3,11 @@
 void shellsort(int vetor[], int tamanho){
 	int elem, i, j, gap, k;
 	int a[5] = { 9, 5, 3, 2, 1 };
-	for (k = 0; k<5; k++){
+	for (k = 0; k < 5; k++){
 		gap = a[k];
-		for (i = gap; i< tamanho; i++){
+		for (i = gap; i < tamanho; i++){
 			elem = vetor[i];
-			for (j = i - gap; (j >= 0) && (elem<vetor[j]); j = j - gap){
+			for (j = i - gap; (j >= 0) && (elem < vetor[j]); j = j - gap){
 				vetor[j + gap] = vetor[j];
 			}
 			vetor[j + gap] = elem;
@@ -17,7 +17,7 @@ void shellsort(int vetor[], int tamanho){
 void shellsortdesc(int vetor[], int tamanho){
 	int elem, i, j, gap, k;
 	int a[5] = { 9, 5, 3, 2, 1 };
-	for (k = 0; k<5; k++){
+	for (k = 0; k < 5; k++){
 		gap = a[k];
 		for (i = gap; i< tamanho; i++){
 			elem = vetor[i];
@@ -31,11 +31,11 @@ void shellsortdesc(int vetor[], int tamanho){
 void shellsort2(int vetor[], int tamanho, int incremento[], int teto){
 	int i, j, gap, k, elem;
 
-	for (k = 0; k< teto; k++){
+	for (k = 0; k < teto; k++){
 		gap = incremento[k];
-		for (i = gap; i<tamanho; i++){
+		for (i = gap; i < tamanho; i++){
 			elem = vetor[i];
-			for (j = i - gap; (j >= 0) && (elem<vetor[j]); j = j - gap){
+			for (j = i - gap; (j >= 0) && (elem < vetor[j]); j = j - gap){
 				vetor[j + gap] = vetor[j];
 			}
 			vetor[j + gap] = elem;
@@ -45,7 +45,7 @@ void shellsort2(int vetor[], int tamanho, int incremento[], int teto){
 void shellsort2desc(int vetor[], int tamanho, int incremento[], int teto){
 	int i, j, gap, k, elem;
 
-	for (k = 0; k< teto; k++){
+	for (k = 0; k < teto; k++){
 		gap = incremento[k];
 		for (i = gap; i<tamanho; i++){
 			elem = vetor[i];
@@ -59,9 +59,9 @@ void shellsort2desc(int vetor[], int tamanho, int incremento[], int teto){
 void selectionsort(int vet[], int TAM){
 	int i, Min, aux, j;
 
-	for (i = 0; i<TAM - 1; i++){
+	for (i = 0; i < TAM - 1; i++){
 		Min = i;
-		for (j = i + 1; j<TAM; j++){
+		for (j = i + 1; j < TAM; j++){
 			if (vet[j] < vet[Min]){
 				aux = vet[Min];
 				vet[Min] = vet[j];
@@ -73,7 +73,7 @@ void selectionsort(int vet[], int TAM){
 void selectionsortdesc(int vet[], int TAM){
 	int i, Min, aux, j;
 
-	for (i = 0; i<TAM - 1; i++){
+	for (i = 0; i < TAM - 1; i++){
 		Min = i;
 		for (j = i + 1; j<TAM; j++){
 			if (vet[j] > vet[Min]){
@@ -209,7 +209,7 @@ void heapsort(int a[], int n)
 }
 void gnomesort(int vet[], int size){
 	int i, tmp;
-	for (i = 1; i<size;){
+	for (i = 1; i < size;){
 		if (vet[i - 1] <= vet[i])
 			++i;
 		else{
@@ -224,9 +224,9 @@ void gnomesort(int vet[], int size){
 }
 void insertionsort(int vetor[], int tamanho){
 	int i, j, elem;
-	for (i = 1; i< tamanho; i++){
+	for (i = 1; i < tamanho; i++){
 		elem = vetor[i];
-		for (j = i - 1; (j >= 0) && (elem<vetor[j]); j--){
+		for (j = i - 1; (j >= 0) && (elem < vetor[j]); j--){
 			vetor[j + 1] = vetor[j];
 		}
 		vetor[j + 1] = elem;
@@ -297,6 +297,8 @@ void OrdenacaoMain(){
 	int tam = 15000;
 	int vet[15000];
 	int	vet2[15000];
+	double resultado = 0;
+	int vezes = 10;
 	clock_t Ticks[2];
 
 	/* -------------------------------------
@@ -306,86 +308,134 @@ void OrdenacaoMain(){
 	cout << "   Ordenacao de vetores preenchidos randomicamente \n";
 	cout << "-------------------------------------------------------\n";
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	bubblesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		bubblesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Bubble Sort       | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	insertionsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		insertionsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Insertion Sort    | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	quicksort(vet, 0, tam - 1);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		quicksort(vet, 0, tam - 1);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Quick Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	mergeSort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		mergeSort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Merge Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	gnomesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		gnomesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Gnome Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorRandom(vet, tam);
-	IniciaCronometro(Ticks);
-	heapsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorRandom(vet, tam);
+		IniciaCronometro(Ticks);
+		heapsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo HeapSort          | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
 	cout << "\n\n";
 
 	/* -------------------------------------
 	  Vetor Decrescente
-	------------------------------------- */
+	  ------------------------------------- */
 	cout << "-------------------------------------------------------\n";
 	cout << "   Ordenacao de vetores preenchidos em ordem crescente \n";
 	cout << "-------------------------------------------------------\n";
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	bubblesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		bubblesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Bubble Sort       | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	insertionsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		insertionsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Insertion Sort    | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	quicksort(vet, 0, tam - 1);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		quicksort(vet, 0, tam - 1);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Quick Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	mergeSort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		mergeSort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Merge Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	gnomesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		gnomesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Gnome Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorCrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	heapsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorCrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		heapsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo HeapSort          | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
 	cout << "\n\n";
 
@@ -396,40 +446,66 @@ void OrdenacaoMain(){
 	cout << " Ordenacao de vetores preenchidos em ordem descrescente \n";
 	cout << "-------------------------------------------------------\n";
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	bubblesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Bubble Sort    | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		bubblesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Bubble Sort       | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	insertionsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Insertion Sort | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		insertionsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Insertion Sort    | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	quicksort(vet, 0, tam - 1);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Quick Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		quicksort(vet, 0, tam - 1);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Quick Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	mergeSort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Merge Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		mergeSort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Merge Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	gnomesort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo Gnome Sort     | Tempo gasto: %g ms.", calculaTempo(Ticks));
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		gnomesort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo Gnome Sort        | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
 
-	PreencheVetorDecrescente(vet, tam);
-	IniciaCronometro(Ticks);
-	heapsort(vet, tam);
-	FinalizaCronometro(Ticks);
-	printf("\nMetodo HeapSort       | Tempo gasto: %g ms.", calculaTempo(Ticks));
-	
+	for (int i = 0; i < vezes; i++){
+		PreencheVetorDecrescente(vet, tam);
+		IniciaCronometro(Ticks);
+		heapsort(vet, tam);
+		FinalizaCronometro(Ticks);
+		resultado += calculaTempo(Ticks);
+	}
+	cout << "Metodo HeapSort          | Tempo gasto: " << resultado / vezes << " ms.\n";
+	resultado = 0;
+
+	cout << "\n\n";
+
 }
