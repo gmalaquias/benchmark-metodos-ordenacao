@@ -104,7 +104,7 @@ void MostraVetor(int vet[], int tam){
 	}
 }
 double calculaTempo(clock_t Ticks[]){
-	return (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+	return  (long)(Ticks[1] - Ticks[0]) * 1000 / CLOCKS_PER_SEC;
 }
 void IniciaCronometro(clock_t Ticks[]){
 	Ticks[0] = clock();
@@ -297,8 +297,8 @@ void OrdenacaoMain(){
 	int tam = 15000;
 	int vet[15000];
 	int	vet2[15000];
-	double resultado = 0;
-	int vezes = 10;
+	float resultado = 0;
+	float vezes = 10.0;
 	clock_t Ticks[2];
 
 	/* -------------------------------------
